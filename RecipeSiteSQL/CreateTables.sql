@@ -1,5 +1,5 @@
 /*My Recipe website will consist of 3 tables, to simplify users I've just added an author option which I will later use for filtering results.*/
-
+CREATE DATABASE RecipeSite;
 /*The author table is a simple way to display who created a what recipe, it has a one to many relationship with recipes as a single author can write multiple recipes and the recipe is uniquely theirs*/
 CREATE TABLE Authors(
    author_id SERIAL PRIMARY KEY,
