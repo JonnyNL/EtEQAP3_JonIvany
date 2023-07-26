@@ -1,0 +1,1 @@
+Page functionings will go here to be routed into their views

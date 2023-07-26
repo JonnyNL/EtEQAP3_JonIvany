@@ -1,0 +1,1 @@
+Styles and images will be stored here in their corresponding files, server handling will handling public to serve static so we can read serve styles and images
