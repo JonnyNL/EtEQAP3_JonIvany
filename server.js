@@ -1,5 +1,6 @@
 const express = require('express');
 const serverHandling = require('./middleware/serverHandling');
+const recipeDAL = require('./database/recipes.dal'); // require your data access layer
 const app = express();
 
 // Debugging Middleware
@@ -16,8 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(serverHandling);
 
 // Route to render the "Recipes" page using the "recipePage.ejs" template
-app.get('/', (req, res) => {
-  res.render('recipePage'); // Render the "recipePage.ejs" template
+app.get('/', async (req, res) => { // make this an async function
+  try {
+    const recipes = await recipeDAL.getAllRecipes(); // get all recipes
+    res.render('recipePage', { recipes: recipes }); // pass recipes to the view
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
 });
 
 // Error Handling Middleware

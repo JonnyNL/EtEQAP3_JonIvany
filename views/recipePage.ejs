@@ -6,6 +6,17 @@
 </head>
 <body>
     <h1>Recipes</h1>
-
+    <% for(let i = 0; i < recipes.length; i++) { %> 
+        <div>
+          <h2><%= recipes[i].title %></h2> 
+          <p>By: <%= recipes[i].author.name %></p> 
+          <p>Ingredients: 
+            <% recipes[i].ingredients.forEach(ingredient => { %>
+              <div><%= ingredient.name %>: <%= ingredient.quantity %></div>
+            <% }) %> 
+          </p> 
+          <p><%= recipes[i].instructions %></p>
+        </div>
+      <% } %>
 </body>
 </html>
