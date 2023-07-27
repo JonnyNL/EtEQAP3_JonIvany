@@ -1,6 +1,7 @@
 const express = require('express');
 const serverHandling = require('./middleware/serverHandling');
-const recipeDAL = require('./database/recipes.dal'); // require your data access layer
+const recipeRoutes = require('./routes/recipePage.js'); // import your new routes
+const methodOverride = require('method-override');
 const app = express();
 
 // Debugging Middleware
@@ -13,19 +14,12 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 
-app.use(serverHandling);
-
-// Route to render the "Recipes" page using the "recipePage.ejs" template
-app.get('/', async (req, res) => { // make this an async function
-  try {
-    const recipes = await recipeDAL.getAllRecipes(); // get all recipes
-    res.render('recipePage', { recipes: recipes }); // pass recipes to the view
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Something went wrong!');
-  }
+app.get('/', (req, res) => {
+  res.redirect('/recipe');
 });
+app.use('/recipe', recipeRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

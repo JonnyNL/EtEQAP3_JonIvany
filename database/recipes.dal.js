@@ -53,6 +53,30 @@ var getAllRecipes = function() {
     });
 };
 
+var deleteRecipe = function(recipe_id) {
+    if(DEBUG) console.log(`recipes.dal.deleteRecipe(${recipe_id})`);
+    return new Promise(function(resolve, reject) {
+        const sqlIngredients = "DELETE FROM ingredients WHERE recipe_id = $1";
+        db.query(sqlIngredients, [recipe_id], (err, result) => {
+            if (err) {
+                if(DEBUG) console.log(err);
+                reject(err);
+            } else {
+                const sqlRecipe = "DELETE FROM recipes WHERE recipe_id = $1";
+                db.query(sqlRecipe, [recipe_id], (err, result) => {
+                    if (err) {
+                        if(DEBUG) console.log(err);
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+        });
+    });
+};
+
 module.exports = {
     getAllRecipes,
+    deleteRecipe,
 };

@@ -1,4 +1,4 @@
-const path = require('path');
+/*const path = require('path');
 
 module.exports = (req, res, next) => {
     const fileTypes = /jpeg|jpg|png|gif/;
@@ -10,4 +10,4 @@ module.exports = (req, res, next) => {
     }
 
     res.redirect('/');
-};
+}; */ /*Not needed, serving static files through server, remove this @patch_branch middle ware included in server big dummy mistake by me ignoring that me dough dough brain duhhooyy */
