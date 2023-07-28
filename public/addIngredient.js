@@ -13,3 +13,7 @@ document.getElementById('addIngredient').addEventListener('click', function() {
         div.remove();
     });
 });
+
+document.getElementById('cancelButton').addEventListener('click', function() {
+    window.location.href = '/'; // redirect to the main page
+});
