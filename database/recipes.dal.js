@@ -181,6 +181,36 @@ const getMaxIngredientId = function () {
     });
   };
 
+  var updateRecipeName = function (recipe_id, title) {
+    if (DEBUG) console.log(`recipes.dal.updateRecipeName(${recipe_id}, ${title})`);
+    return new Promise(function (resolve, reject) {
+      const sql = "UPDATE recipes SET title = $1 WHERE recipe_id = $2 RETURNING *";
+      db.query(sql, [title, recipe_id], (err, result) => {
+        if (err) {
+          if (DEBUG) console.log(err);
+          reject(err);
+        } else {
+          resolve(result.rows[0]);
+        }
+      });
+    });
+  };
+  
+  var updateRecipeInstructions = function (recipe_id, instructions) {
+    if (DEBUG) console.log(`recipes.dal.updateRecipeInstructions(${recipe_id}, ${instructions})`);
+    return new Promise(function (resolve, reject) {
+      const sql = "UPDATE recipes SET instructions = $1 WHERE recipe_id = $2 RETURNING *";
+      db.query(sql, [instructions, recipe_id], (err, result) => {
+        if (err) {
+          if (DEBUG) console.log(err);
+          reject(err);
+        } else {
+          resolve(result.rows[0]);
+        }
+      });
+    });
+  };
+
 module.exports = {
     getAllRecipes,
     deleteRecipe,
@@ -188,4 +218,6 @@ module.exports = {
     insertRecipe,
     insertAuthor,
     searchRecipes,
+    updateRecipeName,
+    updateRecipeInstructions,
 };

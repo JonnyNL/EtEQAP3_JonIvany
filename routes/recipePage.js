@@ -59,4 +59,28 @@ router.post('/new', async (req, res) => {
   }
 });
 
+// PUT route to update the recipe name
+router.put('/:id', async (req, res) => {
+  try {
+    const { title } = req.body;
+    await db.updateRecipeName(req.params.id, title);
+    res.json({ message: "Recipe name updated successfully" });
+  } catch (err) {
+    console.error(err.stack);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+});
+
+// PATCH route to update the recipe instructions
+router.patch('/:id', async (req, res) => {
+  try {
+    const { instructions } = req.body;
+    await db.updateRecipeInstructions(req.params.id, instructions);
+    res.json({ message: "Recipe instructions updated successfully" });
+  } catch (err) {
+    console.error(err.stack);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+});
+
 module.exports = router;
