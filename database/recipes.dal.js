@@ -76,7 +76,52 @@ var deleteRecipe = function(recipe_id) {
     });
 };
 
+var insertAuthor = function(name) {
+    return new Promise(function(resolve, reject) {
+        const sql = "INSERT INTO authors (name) VALUES ($1) RETURNING *";
+        db.query(sql, [name], (err, result) => {
+            if (err) {
+                if(DEBUG) console.log(err);
+                reject(err);
+            } else {
+                resolve(result.rows[0]);
+            }
+        });
+    });
+};
+
+var insertRecipe = function(title, instructions, author_id) {
+    return new Promise(function(resolve, reject) {
+        const sql = "INSERT INTO recipes (title, instructions, author_id) VALUES ($1, $2, $3) RETURNING *";
+        db.query(sql, [title, instructions, author_id], (err, result) => {
+            if (err) {
+                if(DEBUG) console.log(err);
+                reject(err);
+            } else {
+                resolve(result.rows[0]);
+            }
+        });
+    });
+};
+
+var insertIngredient = function(name, quantity, recipe_id) {
+    return new Promise(function(resolve, reject) {
+        const sql = "INSERT INTO ingredients (name, quantity, recipe_id) VALUES ($1, $2, $3) RETURNING *";
+        db.query(sql, [name, quantity, recipe_id], (err, result) => {
+            if (err) {
+                if(DEBUG) console.log(err);
+                reject(err);
+            } else {
+                resolve(result.rows[0]);
+            }
+        });
+    });
+};
+
 module.exports = {
     getAllRecipes,
     deleteRecipe,
+    insertIngredient,
+    insertRecipe,
+    insertAuthor,
 };

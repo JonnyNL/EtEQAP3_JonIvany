@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Recipe</title>
+</head>
+<body>
+    <form action="/recipe/new" method="POST">
+        <label>Author Name: </label><input type="text" name="authorName" required>
+        <label>Recipe Title: </label><input type="text" name="recipeTitle" required>
+        <label>Recipe Instructions: </label><textarea name="recipeInstructions" required></textarea>
+        <div id="ingredients">
+            <label>Ingredient Name: </label><input type="text" name="ingredientName[]" required>
+            <label>Quantity: </label><input type="text" name="quantity[]" required>
+        </div>
+        <button type="button" id="addIngredient">Add More Ingredients</button>
+        <button type="submit">Save</button>
+    </form>
+    <script src="/addIngredient.js"></script>
+</body>
+</html>
