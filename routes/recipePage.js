@@ -2,17 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/recipes.dal');
 
-// GET route to retrieve all recipes
-router.get('/', async (req, res) => {
-  try {
-    const recipes = await db.getAllRecipes(); 
-    res.render('recipePage', { recipes: recipes });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Something went wrong!');
-  }
-});
-
 // DELETE route to delete a specific recipe
 router.delete('/:id', async (req, res) => {
     try {
@@ -82,5 +71,61 @@ router.patch('/:id', async (req, res) => {
     res.status(500).json({ error: "Something went wrong!" });
   }
 });
+
+// GET route to retrieve all recipes
+router.get('/', async (req, res) => {
+  try {
+    const recipes = await db.getAllRecipes(); 
+    res.render('recipePage', { recipes: recipes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+router.get('/recipes', async (req, res) => {
+  try {
+    const recipes = await db.getAllRecipes();
+    res.json(recipes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+// GET route to retrieve a specific author by their ID
+router.get('/author/:id', async (req, res) => {
+  try {
+    const author = await db.getAuthorById(req.params.id);
+    res.json(author);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+// GET route to retrieve a specific ingredient by its ID
+router.get('/ingredient/:id', async (req, res) => {
+  try {
+    const ingredient = await db.getIngredientById(req.params.id);
+    res.json(ingredient);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+// GET route to retrieve a specific recipe by its ID
+router.get('/:id', async (req, res) => {
+  try {
+    const recipe = await db.getRecipeById(req.params.id);
+    res.json(recipe);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+
 
 module.exports = router;
