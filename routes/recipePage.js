@@ -25,11 +25,11 @@ router.get('/search', async (req, res) => {
   }
 });
 
-router.get('/new', (req, res) => {
+router.get('/recipe/new', (req, res) => {
   res.render('newRecipe');
 });
 
-router.post('/new', async (req, res) => {
+router.post('/recipe/new', async (req, res) => {
   try {
       const { authorName, recipeTitle, recipeInstructions, ingredientName, quantity } = req.body;
       // Insert the new author and get the result
