@@ -22,7 +22,7 @@
           <button onclick="editRecipeName('<%= recipes[i].recipe_id %>');">Edit Name</button>
           <button onclick="editRecipeInstructions('<%= recipes[i].recipe_id %>');">Edit Instructions</button>
         </div>
-        <form action="/recipe/<%= recipes[i].recipe_id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+        <form action="/home/recipe/<%= recipes[i].recipe_id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
           <button type="submit">Delete Recipe</button>
         </form>
       <% } %>

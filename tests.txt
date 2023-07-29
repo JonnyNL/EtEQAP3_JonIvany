@@ -1,0 +1,31 @@
+#Admin can edit the name or instructions of all recipes:
+
+>Login as an admin.
+>Go to the recipe page (/home).
+>For each recipe displayed, click on the "Edit Name" button or "Edit Instructions" button.
+>Update the name or instructions and save the changes.
+>Verify that the recipe name or instructions are updated successfully.
+
+
+#Admin can delete recipes:
+
+>ogin as an admin.
+>Go to the recipe page (/home).
+>For each recipe displayed, click on the "Delete Recipe" button.
+>Confirm the deletion.
+>Verify that the recipe is deleted from the list.
+
+
+#Users can search for recipes, authors, and ingredients:
+
+>Go to the home page (/home).
+>Use the search bar to search for recipes, authors, or ingredients.
+>Verify that the search results display the relevant information.
+
+
+#Users can publish new recipes:
+
+>Go to the new recipe page (/home/new).
+>Fill in the required fields (author name, recipe title, recipe instructions, ingredients, and quantities).
+>Click the "Save" button to publish the new recipe.
+>Verify that the new recipe is added to the recipe list on the recipe page (/home).

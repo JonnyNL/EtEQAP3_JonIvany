@@ -25,11 +25,11 @@ router.get('/search', async (req, res) => {
   }
 });
 
-router.get('/new', (req, res) => {
+router.get('/recipe/new', (req, res) => {
   res.render('newRecipe');
 });
 
-router.post('/new', async (req, res) => {
+router.post('/recipe/new', async (req, res) => {
   try {
       const { authorName, recipeTitle, recipeInstructions, ingredientName, quantity } = req.body;
       // Insert the new author and get the result
@@ -41,7 +41,7 @@ router.post('/new', async (req, res) => {
           await db.insertIngredient(ingredientName[i], quantity[i], recipe.recipe_id);
       }
       // Redirect to the main page
-      res.redirect('/recipe');
+      res.redirect('/');
   } catch (err) {
       console.error(err.stack);
       res.status(500).send('Something went wrong!');
@@ -49,7 +49,7 @@ router.post('/new', async (req, res) => {
 });
 
 // PUT route to update the recipe name
-router.put('/:id', async (req, res) => {
+router.put('/recipe/:id', async (req, res) => {
   try {
     const { title } = req.body;
     await db.updateRecipeName(req.params.id, title);
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // PATCH route to update the recipe instructions
-router.patch('/:id', async (req, res) => {
+router.patch('/recipe/:id', async (req, res) => {
   try {
     const { instructions } = req.body;
     await db.updateRecipeInstructions(req.params.id, instructions);
