@@ -6,7 +6,7 @@ function editRecipeName(recipe_id) {
     // Check if the user entered a valid non-empty recipe name
     if (newTitle !== null && newTitle.trim() !== "") {
         // Make a PUT request to update the recipe name on the server
-        fetch(`/recipe/${recipe_id}`, {
+        fetch(`/home/recipe/${recipe_id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ function editRecipeInstructions(recipe_id) {
     // Check if the user entered valid non-empty recipe instructions
     if (newInstructions !== null && newInstructions.trim() !== "") {
         // Make a PATCH request to update the recipe instructions on the server
-        fetch(`/recipe/${recipe_id}`, {
+        fetch(`/home/recipe/${recipe_id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

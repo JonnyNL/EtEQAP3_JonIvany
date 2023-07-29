@@ -1,5 +1,4 @@
 const express = require('express');
-const serverHandling = require('./middleware/serverHandling');
 const recipeRoutes = require('./routes/recipePage.js'); // import your new routes
 const methodOverride = require('method-override');
 const path = require('path');
@@ -19,9 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-  res.redirect('/recipe');
+  res.redirect('/home');
 });
-app.use('/recipe', recipeRoutes);
+app.use('/home', recipeRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
