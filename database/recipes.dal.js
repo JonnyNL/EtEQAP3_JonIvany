@@ -156,10 +156,36 @@ const getMaxIngredientId = function () {
     }
   };
 
+  var searchRecipes = function (keyword) {
+    return new Promise(function (resolve, reject) {
+      const sql = `
+        SELECT * FROM recipes
+        WHERE 
+          title ILIKE $1 OR
+          EXISTS (SELECT 1 FROM authors WHERE authors.author_id = recipes.author_id AND name ILIKE $1) OR
+          EXISTS (SELECT 1 FROM ingredients WHERE ingredients.recipe_id = recipes.recipe_id AND name ILIKE $1)
+      `;
+      db.query(sql, [`%${keyword}%`], async (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          let recipes = result.rows;
+          for (let i = 0; i < recipes.length; i++) {
+            let recipe = recipes[i];
+            recipe.author = await getAuthor(recipe.author_id);
+            recipe.ingredients = await getIngredients(recipe.recipe_id);
+          }
+          resolve(recipes);
+        }
+      });
+    });
+  };
+
 module.exports = {
     getAllRecipes,
     deleteRecipe,
     insertIngredient,
     insertRecipe,
     insertAuthor,
+    searchRecipes,
 };

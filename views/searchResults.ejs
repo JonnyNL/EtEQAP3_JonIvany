@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+  <%- include('./partials/navbar') %>
+  <h1>Showing search results for "<%= keyword %>"</h1>
+  <% if (recipes.length > 0) { %>
+    <% recipes.forEach(recipe => { %> 
+        <div>
+          <h2><%= recipe.title %></h2> 
+          <p>By: <%= recipe.author.name %></p> 
+          <p>Ingredients: 
+            <% recipe.ingredients.forEach(ingredient => { %>
+              <div><%= ingredient.name %>: <%= ingredient.quantity %></div>
+            <% }) %> 
+          </p> 
+          <p><%= recipe.instructions %></p>
+        </div>
+        <form action="/recipe/<%= recipe.recipe_id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+          <button type="submit">Delete Recipe</button>
+        </form>
+    <% }) %>
+  <% } else { %>
+    <p>No results found :(</p>
+  <% } %>
+</body>
+</html>

@@ -24,6 +24,18 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// GET route to search for recipes
+router.get('/search', async (req, res) => {
+  try {
+    const keyword = req.query.keyword;
+    const recipes = await db.searchRecipes(keyword); // Implement the search function in recipe.dal.js
+    res.render('searchResults', { keyword, recipes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
 router.get('/new', (req, res) => {
   res.render('newRecipe');
 });
